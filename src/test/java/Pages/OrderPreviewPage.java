@@ -78,7 +78,6 @@ public class OrderPreviewPage  extends Actions {
 
     public void viewInvoice() {
         ClickObject(viewInvoiceHistoryBtn, driver);
-        waitForPageToLoad(driver, 15);
         ClickObject(viewBtn, driver);
         switchToNewTab();
         waitForPageToLoad(driver, 15);
@@ -97,7 +96,7 @@ public class OrderPreviewPage  extends Actions {
 
         String parent = driver.getWindowHandle();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(d -> d.getWindowHandles().size() > 1);
 
         for (String window : driver.getWindowHandles()) {

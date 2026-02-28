@@ -1,7 +1,6 @@
 package Pages;
 
 import Basics.Actions;
-import Basics.DataFunction;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,10 +12,10 @@ import java.io.IOException;
 
 import static Pages.LearnPage.webAutomationAdvanceBtn;
 
-public class WebAutoAdvancedPage extends Actions {
+public class InventoryPage extends Actions {
     WebDriver driver;
 
-    public WebAutoAdvancedPage(WebDriver driver){
+    public InventoryPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
