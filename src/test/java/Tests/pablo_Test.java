@@ -13,17 +13,17 @@ public class pablo_Test extends Base {
 
     @Test
     public void pabloTest() throws IOException {
-        landingObj.verifyLandingPage();
+        landingObj.verifyLandingPage(node);
         loginObj.login(Username,Password);
-        loginObj.validateLogin(Username);
+        loginObj.validateLogin(node);
         learnObj.navigateToLearnPage();
-        learnObj.verifyLearnPage();
-        webAutoAdvancedObj.verifyWebAutoAdvancedPage();
-        webAutoAdvancedObj.customerSelectsProduct(DeviceType, Brand, Storage, Color,Quantity ,DeliveryAddress);
-        webAutoAdvancedObj.validateCustomerProductSelection();
+        learnObj.verifyLearnPage(node);
+        inventoryObj.verifyWebAutoAdvancedPage(node);
+        inventoryObj.customerSelectsProduct(DeviceType, Brand, Storage, Color,Quantity ,DeliveryAddress);
+        inventoryObj.validateCustomerProductSelection(node);
         orderPreviewObj.orderPreview(DiscountCode);
-        orderPreviewObj.validatePurchaseSuccess();
-        orderPreviewObj.viewInvoice();
+        orderPreviewObj.validatePurchaseSuccess(node);
+        orderPreviewObj.viewInvoice(node);
 
     }
 }

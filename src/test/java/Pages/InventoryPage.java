@@ -1,6 +1,8 @@
 package Pages;
 
 import Basics.Actions;
+import Basics.ReportingUtils;
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -57,14 +59,16 @@ public class InventoryPage extends Actions {
 
 
     // Method to verify that the Web Automation Advance page is displayed correctly
-    public  void verifyWebAutoAdvancedPage(){
-        waitForPageToLoad(driver, 15);
+    public  void verifyWebAutoAdvancedPage(ExtentTest test){
+        waitForPageToLoad(driver, 30);
         ClickObject(webAutomationAdvanceBtn, driver);
         try {
+                ReportingUtils.navigateAndReport(driver, test, "WebAutomationAdvancePage_Successful");
             Assert.assertEquals(inventoryFormTxt.getText(), inventoryFormTxt.getText(), "Web Automation Advance page validation failed: Inventory form text does not match expected.");
             System.out.println("Web Automation Advance page validation successful: Inventory form is displayed" +
                     ".");
         } catch (Exception e) {
+            ReportingUtils.navigateAndReport(driver, test, "WebAutomationAdvancePage_Failed: " + e.getMessage());
             System.out.println("Web Automation Advance page validation failed: " + e.getMessage());
             Assert.fail("Web Automation Advance page validation failed: " + e.getMessage());
         }
@@ -83,16 +87,16 @@ public class InventoryPage extends Actions {
     }
 
     // Method to validate that the customer's product selection is displayed correctly on the page
-    public void validateCustomerProductSelection( ) {
-        waitForPageToLoad(driver, 15);
+    public void validateCustomerProductSelection(ExtentTest test) {
+        waitForPageToLoad(driver, 30);
         try {
+            ReportingUtils.navigateAndReport(driver, test, "CustomerProductSelection_Successful");
             Assert.assertEquals(unitPriceTxt.getText(), unitPriceTxt.getText(),"Unit price text is not displayed.");
             Assert.assertEquals(devicePreviewImg.getText(), devicePreviewImg.getText(),"Device preview image is not displayed.");
             Assert.assertEquals(subtotalTxt.getText(), subtotalTxt.getText(),"Subtotal text is not displayed.");
             System.out.println("Customer Product selection details validation successful: All expected elements are displayed.");
-
-
         } catch (Exception e) {
+            ReportingUtils.navigateAndReport(driver, test, "CustomerProductSelection_Failed: " + e.getMessage());
             System.out.println("Customer selection validation failed: " + e.getMessage());
             Assert.fail("Customer selection validation failed: " + e.getMessage());
         }

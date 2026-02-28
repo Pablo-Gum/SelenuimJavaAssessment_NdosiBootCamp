@@ -1,6 +1,8 @@
 package Pages;
 
 import Basics.Actions;
+import Basics.ReportingUtils;
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +22,7 @@ public class LearnPage extends Actions {
     WebElement learnPageTxt;
 
     @FindBy(xpath = "//*[@id='practice-tabs']//span[text()='Web Automation Advance']")
-     public static WebElement webAutomationAdvanceBtn;
+    public static WebElement webAutomationAdvanceBtn;
 
     @FindBy(xpath = "//button[contains(@class,'nav-dropdown-item')]//span[text()='Learning Materials']")
     WebElement learningMaterialsOption;
@@ -34,12 +36,18 @@ public class LearnPage extends Actions {
     }
 
     // Method to verify that the Learn page is displayed correctly
-    public void verifyLearnPage(){
+    public void verifyLearnPage(ExtentTest test) {
         waitForPageToLoad(driver, 10);
-        Assert.assertEquals(webAutomationAdvanceBtn.getText(),webAutomationAdvanceBtn.getText(),"Learn page validation failed: Web Automation Advance button text does not match expected.");
-        System.out.println("Learn page validation successful: Web Automation Advance button text matches expected.");
-    }
+        try {
+            ReportingUtils.navigateAndReport(driver, test, "LearnPage successful");
+            Assert.assertEquals(webAutomationAdvanceBtn.getText(), webAutomationAdvanceBtn.getText(), "Learn page validation failed: Web Automation Advance button text does not match expected.");
+            System.out.println("Learn page validation successful: Web Automation Advance button text matches expected.");
+        } catch (Exception e) {
+            System.out.println("Learn page validation failed: " + e.getMessage());
+            Assert.fail("Learn page validation failed: " + e.getMessage());
+        }
 
+    }
 
 }
 
