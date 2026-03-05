@@ -17,6 +17,8 @@ public class ReportingUtils {
         ExtentReports extent =  new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter(ReportName);
 
+
+
         extent.attachReporter(spark);
         return extent;
 

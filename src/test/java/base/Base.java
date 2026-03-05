@@ -1,28 +1,25 @@
-package Base;
+package base;
 
 import Basics.DataFunction;
-import Basics.ExcelReader;
 import Basics.JsonReader;
-import Basics.ReportingUtils;
 import Pages.*;
 import Utilities.BrowserFactory;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
+import Utilities.Screenshots;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 import java.time.Duration;
 
-import static Basics.ExcelReader.getCellData;
-
 public class Base extends BrowserFactory {
+
     static JsonReader   reader ;
     public static String Url,Browser;
-    protected static ExtentTest node;
-    protected static ExtentReports repo;
+    public static Screenshots screenshots;
     DataFunction dataFunction = new DataFunction();
     public static LandingPage landingObj;;
     public static LoginPage loginObj;
@@ -38,10 +35,7 @@ public class Base extends BrowserFactory {
         Browser = reader.getValue("Browser");
         setDriver(Browser);
         navigateToUrl(Url);
-
-        repo = ReportingUtils.initializeExtentReports("Reports/Pablo_NdosiBootCamp_Assessment.html");
-        ExtentTest test = repo.createTest("Pablo_De_Legend").assignAuthor("Pablo");
-        node = test.createNode("MyNode");
+        screenshots = new Screenshots();
 
         landingObj = new LandingPage(getDriver());
         loginObj = new LoginPage(getDriver());
@@ -53,20 +47,19 @@ public class Base extends BrowserFactory {
 
     // This method will run before each test method and will read the test data from the Excel file and store it in the respective variables for use in the test methods.
     @BeforeMethod
-  public void testData() throws IOException {
+    public void testData() throws IOException {
         dataFunction.excelTestData();
     }
 
     // This method will run after each test method and will close and quit the WebDriver to ensure a clean state for the next test.
-    @AfterMethod
+    @AfterSuite
     public  void tearDown(){
-        repo.flush();
         getDriver().close();
         getDriver().quit();
     }
 
     // Method to switch to the newly opened tab
-    public  static void switchToNewTab() {
+public  static void switchToNewTab() {
 
         String parent = driver.getWindowHandle();
 

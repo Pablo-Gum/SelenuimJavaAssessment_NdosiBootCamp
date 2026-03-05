@@ -1,9 +1,6 @@
 package Pages;
 
 import Basics.Actions;
-import Basics.DataFunction;
-import Basics.ReportingUtils;
-import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +10,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 
-import static Basics.Actions.waitForPageToLoad;
+import static base.Base.screenshots;
 
 public class LoginPage extends Actions {
 
@@ -49,15 +46,16 @@ public class LoginPage extends Actions {
         ClickObject(SubmitBtn, driver);
     }
 
-    public void validateLogin(ExtentTest test) throws IOException {
+    public void validateLogin() throws IOException {
         waitForPageToLoad(driver, 30);
         try {
-            ReportingUtils.navigateAndReport(driver, test, "Login  successful");
+
             Assert.assertEquals(WelcomeBackTxt.getText(), WelcomeBackTxt.getText(), "Login validation failed: Welcome message does not match expected.");
             System.out.println("Login validation successful: Welcome message matches expected.");
+            screenshots.captureScreenshot(driver, "Login successful");
         } catch (Exception e) {
-            ReportingUtils.navigateAndReport(driver, test, "Login  failed: " + e.getMessage());
             System.out.println("Login validation failed: " + e.getMessage());
+            screenshots.captureScreenshot(driver, "LoginValidation_Failure");
             Assert.fail("Login validation failed: " + e.getMessage());
         }
 

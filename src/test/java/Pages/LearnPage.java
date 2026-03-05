@@ -1,14 +1,14 @@
 package Pages;
 
 import Basics.Actions;
-import Basics.ReportingUtils;
-import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.Assert;
+
+import static base.Base.screenshots;
 
 public class LearnPage extends Actions {
     WebDriver driver;
@@ -36,14 +36,16 @@ public class LearnPage extends Actions {
     }
 
     // Method to verify that the Learn page is displayed correctly
-    public void verifyLearnPage(ExtentTest test) {
+    public void verifyLearnPage() {
         waitForPageToLoad(driver, 10);
         try {
-            ReportingUtils.navigateAndReport(driver, test, "LearnPage successful");
+
             Assert.assertEquals(webAutomationAdvanceBtn.getText(), webAutomationAdvanceBtn.getText(), "Learn page validation failed: Web Automation Advance button text does not match expected.");
             System.out.println("Learn page validation successful: Web Automation Advance button text matches expected.");
+            screenshots.captureScreenshot(driver, "LearnPage Successful");
         } catch (Exception e) {
             System.out.println("Learn page validation failed: " + e.getMessage());
+            screenshots.captureScreenshot(driver, "LearnPage_Failure");
             Assert.fail("Learn page validation failed: " + e.getMessage());
         }
 

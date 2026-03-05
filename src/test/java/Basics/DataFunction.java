@@ -24,6 +24,7 @@ public class DataFunction {
 
     public void excelTestData() throws IOException {
         data.initializeWorkbook("src/test/resources/TestData/myTestData.xlsx");
+
         Username = getCellData("Login_Credentials", "Username", 1);
         Password = getCellData("Login_Credentials", "Password", 1);
         DeliveryAddress = getCellData("Order_Details", "Deliver_Address", 1);

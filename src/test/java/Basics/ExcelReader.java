@@ -17,13 +17,12 @@ public class ExcelReader {
     static String xlFilePath;
     static Workbook workbook;
     static Sheet sheet;
-    static Row row;
-    static Cell rell;
+
 
 
     // Method to initialize the Excel workbook
     public void initializeWorkbook(String xlFilePath) throws IOException {
-        this.xlFilePath = xlFilePath;
+        ExcelReader.xlFilePath = xlFilePath;
         fis = new FileInputStream(xlFilePath);
         workbook = new XSSFWorkbook(fis);
         fis.close();
