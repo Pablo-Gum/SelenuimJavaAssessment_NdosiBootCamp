@@ -15,32 +15,32 @@ public class Pablo_Test extends Base {
     public void landingPageTest() throws IOException {
         landingObj.verifyLandingPage();
     }
-    @Test(priority = 1 ,dependsOnMethods = "landingPageTest")
+    @Test(dependsOnMethods = "landingPageTest")
     public void loginTest() throws IOException {
         loginObj.login(Username,Password);
         loginObj.validateLogin();
     }
-    @Test(priority = 2, dependsOnMethods = "loginTest")
+    @Test( dependsOnMethods = "loginTest")
     public void learnPageTest() throws IOException {
         learnObj.navigateToLearnPage();
         learnObj.verifyLearnPage();
     }
-    @Test(priority = 3, dependsOnMethods = "learnPageTest")
+    @Test(dependsOnMethods = "learnPageTest")
     public void inventoryPageTest() throws IOException {
         inventoryObj.verifyWebAutoAdvancedPage();
 
     }
-    @Test(priority = 4, dependsOnMethods = "inventoryPageTest")
+    @Test(dependsOnMethods = "inventoryPageTest")
     public  void CustomerSelectionTest() throws IOException {
         inventoryObj.customerSelectsProduct(DeviceType, Brand, Storage, Color,Quantity ,DeliveryAddress);
         inventoryObj.validateCustomerProductSelection();
     }
-    @Test(priority = 5, dependsOnMethods = "CustomerSelectionTest")
+    @Test(dependsOnMethods = "CustomerSelectionTest")
     public void orderPreviewTest() throws IOException {
         orderPreviewObj.orderPreview(DiscountCode);
         orderPreviewObj.validatePurchaseSuccess();
     }
-        @Test(priority = 6, dependsOnMethods = "orderPreviewTest")
+        @Test(dependsOnMethods = "orderPreviewTest")
         public void viewInvoiceTest() throws IOException {
             orderPreviewObj.viewInvoice();
         }

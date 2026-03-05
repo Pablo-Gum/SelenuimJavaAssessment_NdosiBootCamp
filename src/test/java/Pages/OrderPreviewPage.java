@@ -1,6 +1,7 @@
 package Pages;
 
 import Basics.Actions;
+import Utilities.Screenshots;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,10 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.Assert;
 
-import java.io.IOException;
-
+import static Utilities.Screenshots.getBase64Screenshot;
 import static base.Base.screenshots;
-import static base.Base.switchToNewTab;
+
 
 public class OrderPreviewPage  extends Actions {
     WebDriver driver;
@@ -54,7 +54,7 @@ public class OrderPreviewPage  extends Actions {
     WebElement invoiceDisplay;
 
     // Method to perform order preview actions
-    public void orderPreview(String DiscountCode) throws IOException {
+    public void orderPreview(String DiscountCode) {
         ClickObject(inventoryNextBtn, driver);
         waitForPageToLoad(driver, 15);
         ClickObject(expressShippingORadioBtn, driver);
@@ -70,29 +70,29 @@ public class OrderPreviewPage  extends Actions {
         try {
             Assert.assertEquals(purchaseSuccessToast.getText(), purchaseSuccessToast.getText(),"Purchase success toast is not displayed.");
             System.out.println("Purchase success validation successful: Purchase success toast is displayed.");
-            screenshots.captureScreenshot(driver, "Purchase_Successful");
+            getBase64Screenshot(driver);
         } catch (Exception e) {
             System.out.println("Purchase failed validation : " + e.getMessage());
-            screenshots.captureScreenshot(driver, "Purchase_Failed");
+           getBase64Screenshot(driver);
             Assert.fail("Purchase failed validation : " + e.getMessage());
         }
 
     }
 
-    public void viewInvoice() throws IOException {
+    public void viewInvoice()  {
         ClickObject(viewInvoiceHistoryBtn, driver);
         Explicit_Wait(viewBtn, driver, "element_Clickable", 10);
         ClickObject(viewBtn, driver);
-        switchToNewTab();
+        switchToNewTab(driver);
         waitForPageToLoad(driver, 25);
 
         // Validate that the invoice display is visible
         try {
             Assert.assertTrue(invoiceDisplay.isDisplayed(), "Invoice display is not visible.");
             System.out.println("Invoice display validation successful: Invoice display is visible");
-            screenshots.captureScreenshot(driver, "Invoice_Display_Successful");
+            getBase64Screenshot(driver);
         } catch (Exception e) {
-            screenshots.captureScreenshot(driver, "Invoice_Display_Failed");
+            getBase64Screenshot(driver);
             System.out.println("Invoice display validation failed: " + e.getMessage());
             Assert.fail("Invoice display validation failed: " + e.getMessage());
         }

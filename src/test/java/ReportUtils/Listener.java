@@ -1,28 +1,27 @@
 package ReportUtils;
 
-import Basics.ReportingUtils;
-import Utilities.BrowserFactory;
-import Utilities.Screenshots;
-import base.Base;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import static Utilities.BrowserFactory.getDriver;
+import static Utilities.Screenshots.getBase64Screenshot;
 
 public class Listener implements ITestListener {
 
     private static ExtentReports extent;
     private static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+
+    // Function description: Initialize the ExtentReports instance when the test suite starts
     @Override
     public void onStart(ITestContext context) {
         extent = ExtentReportManager.extentReports();
     }
 
+    // Function description: Create a new ExtentTest instance for each test method and assign it to the ThreadLocal variable
     @Override
     public void onTestStart(ITestResult result) {
 
@@ -30,6 +29,7 @@ public class Listener implements ITestListener {
         extentTest.set(test);
     }
 
+    // Function description: Log the test failure, capture a screenshot, and attach it to the report
     @Override
     public void onTestFailure(ITestResult result) {
 
@@ -39,19 +39,16 @@ public class Listener implements ITestListener {
 
             test.fail(result.getThrowable());
 
-            Object currentClass = result.getInstance();
             WebDriver driver = getDriver();
 
-            String screenshot =
-                    ReportingUtils.getBase64Screenshot(driver);
+            String screenshot = getBase64Screenshot(driver);
 
-            test.addScreenCaptureFromBase64String(
-                    screenshot,
-                    result.getMethod().getMethodName()+ ":  Failure Screenshot"
-            );
+            test.fail(result.getMethod().getMethodName()+ ": Test Details - Failure Screenshot captured");
+            test.addScreenCaptureFromBase64String(screenshot, result.getMethod().getMethodName()+ ":  Failure Screenshot");
         }
     }
 
+    // Function description: Log the test success, capture a screenshot, and attach it to the report
     @Override
     public void onTestSuccess(ITestResult result) {
 
@@ -60,19 +57,16 @@ public class Listener implements ITestListener {
 
             test.pass(result.getThrowable());
 
-            Object currentClass = result.getInstance();
             WebDriver driver = getDriver();
 
-            String screenshot =
-                    ReportingUtils.getBase64Screenshot(driver);
+            String screenshot = getBase64Screenshot(driver);
 
-            test.addScreenCaptureFromBase64String(
-                    screenshot,
-                     result.getMethod().getMethodName()+":  Successful Screenshot"
-            );
+            test.pass(result.getMethod().getMethodName()+ ": Test Details - Successful Screenshot captured");
+            test.addScreenCaptureFromBase64String(screenshot, result.getMethod().getMethodName()+":  Successful Screenshot");
         }
     }
 
+    // Function description: Log the test skip, capture a screenshot, and attach it to the report
     @Override
     public void onTestSkipped(ITestResult result){
 
@@ -81,21 +75,18 @@ public class Listener implements ITestListener {
 
             test.skip(result.getThrowable());
 
-            Object currentClass = result.getInstance();
             WebDriver driver = getDriver();
 
-            String screenshot =
-                    ReportingUtils.getBase64Screenshot(driver);
+            String screenshot = getBase64Screenshot(driver);
 
-            test.addScreenCaptureFromBase64String(
-                    screenshot,
-                    "Skipped Screenshot"
-            );
+            test.skip(result.getMethod().getMethodName()+ ": Test Details - Skipped Screenshot captured");
+            test.addScreenCaptureFromBase64String(screenshot, "Skipped Screenshot");
         }
     }
 
+    // Function description: Flush the ExtentReports instance to write all the logs and screenshots to the report file at the end of the test suite
     @Override
     public void onFinish(ITestContext context) {
-        extent.flush();  // Flush everything at the end
+        extent.flush();// Flush everything at the end
     }
 }
