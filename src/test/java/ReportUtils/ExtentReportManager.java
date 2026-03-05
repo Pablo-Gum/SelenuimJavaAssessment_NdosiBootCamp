@@ -21,7 +21,8 @@ public class ExtentReportManager {
           }
           extentSparkReporter.config().setDocumentTitle("Pablo Extent Report Title");
           extentSparkReporter.config().setTheme(Theme.DARK);
-          extentSparkReporter.config().setReportName("PabloAutomation Report ");
+          extentSparkReporter.config().setReportName("Pablo Automation Report ");
+          extentSparkReporter.config().setTimeStampFormat("yyyy-MM-dd HH:mm:ss");
 
           extentReports.setSystemInfo("OS", System.getProperty("os.name"));
           extentReports.setSystemInfo("Execution Machine", System.getProperty("user.name"));

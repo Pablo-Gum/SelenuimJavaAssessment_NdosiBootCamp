@@ -10,6 +10,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 
+import static Utilities.Screenshots.getBase64Screenshot;
 import static base.Base.screenshots;
 
 public class LoginPage extends Actions {
@@ -52,10 +53,10 @@ public class LoginPage extends Actions {
 
             Assert.assertEquals(WelcomeBackTxt.getText(), WelcomeBackTxt.getText(), "Login validation failed: Welcome message does not match expected.");
             System.out.println("Login validation successful: Welcome message matches expected.");
-            screenshots.captureScreenshot(driver, "Login successful");
+            getBase64Screenshot(driver);
         } catch (Exception e) {
             System.out.println("Login validation failed: " + e.getMessage());
-            screenshots.captureScreenshot(driver, "LoginValidation_Failure");
+           getBase64Screenshot(driver);
             Assert.fail("Login validation failed: " + e.getMessage());
         }
 

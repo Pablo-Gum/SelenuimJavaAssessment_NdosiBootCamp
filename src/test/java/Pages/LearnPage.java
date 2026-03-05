@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.Assert;
 
+import static Utilities.Screenshots.getBase64Screenshot;
 import static base.Base.screenshots;
 
 public class LearnPage extends Actions {
@@ -42,10 +43,10 @@ public class LearnPage extends Actions {
 
             Assert.assertEquals(webAutomationAdvanceBtn.getText(), webAutomationAdvanceBtn.getText(), "Learn page validation failed: Web Automation Advance button text does not match expected.");
             System.out.println("Learn page validation successful: Web Automation Advance button text matches expected.");
-            screenshots.captureScreenshot(driver, "LearnPage Successful");
+            getBase64Screenshot(driver);
         } catch (Exception e) {
             System.out.println("Learn page validation failed: " + e.getMessage());
-            screenshots.captureScreenshot(driver, "LearnPage_Failure");
+            getBase64Screenshot(driver);
             Assert.fail("Learn page validation failed: " + e.getMessage());
         }
 

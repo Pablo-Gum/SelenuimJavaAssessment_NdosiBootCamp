@@ -10,6 +10,7 @@ import org.testng.Assert;
 
 import java.io.IOException;
 
+import static Utilities.Screenshots.getBase64Screenshot;
 import static base.Base.screenshots;
 import static Pages.LearnPage.webAutomationAdvanceBtn;
 
@@ -53,10 +54,6 @@ public class InventoryPage extends Actions {
     WebElement subtotalTxt;
 
 
-
-
-
-
     // Method to verify that the Web Automation Advance page is displayed correctly
     public  void verifyWebAutoAdvancedPage(){
         waitForPageToLoad(driver, 30);
@@ -64,11 +61,11 @@ public class InventoryPage extends Actions {
         try {
             Assert.assertEquals(inventoryFormTxt.getText(), inventoryFormTxt.getText(), "Web Automation Advance page validation failed: Inventory form text does not match expected.");
             System.out.println("Web Automation Advance page validation successful: Inventory form is displayed" +".");
-            screenshots.captureScreenshot(driver, "WebAutomationAdvancePage");
+            getBase64Screenshot(driver);
         } catch (Exception e) {
             System.out.println("Web Automation Advance page validation failed: " + e.getMessage());
             Assert.fail("Web Automation Advance page validation failed: " + e.getMessage());
-            screenshots.captureScreenshot(driver, "WebAutomationAdvancePage_Failed");
+            getBase64Screenshot(driver);
         }
     }
 
@@ -88,15 +85,19 @@ public class InventoryPage extends Actions {
     public void validateCustomerProductSelection() {
         waitForPageToLoad(driver, 30);
         try {
-
-            Assert.assertEquals(unitPriceTxt.getText(), unitPriceTxt.getText(),"Unit price text is not displayed.");
-            Assert.assertEquals(devicePreviewImg.getText(), devicePreviewImg.getText(),"Device preview image is not displayed.");
-            Assert.assertEquals(subtotalTxt.getText(), subtotalTxt.getText(),"Subtotal text is not displayed.");
+                String unitPriceMessage = "Unit price text is not displayed.";
+                String devicePreviewMessage = "Device preview image is not displayed.";
+                String subtotalMessage = "Subtotal text is not displayed.";
+            Assert.assertEquals(unitPriceTxt.getText(), unitPriceTxt.getText(),unitPriceMessage);
+            getBase64Screenshot(driver);
+            Assert.assertEquals(devicePreviewImg.getText(), devicePreviewImg.getText(),devicePreviewMessage);
+            getBase64Screenshot(driver);
+            Assert.assertEquals(subtotalTxt.getText(), subtotalTxt.getText(),subtotalMessage);
             System.out.println("Customer Product selection details validation successful: All expected elements are displayed.");
-            screenshots.captureScreenshot(driver, "CustomerProductSelectionPage successful");
+            getBase64Screenshot(driver);
         } catch (Exception e) {
             System.out.println("Customer selection validation failed: " + e.getMessage());
-            screenshots.captureScreenshot(driver, "CustomerProductSelectionPage_Failed");
+           getBase64Screenshot(driver);
             Assert.fail("Customer selection validation failed: " + e.getMessage());
 
         }

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.Assert;
 
+import static Utilities.Screenshots.getBase64Screenshot;
 import static base.Base.screenshots;
 
 public class LandingPage extends Actions {
@@ -29,10 +30,10 @@ public class LandingPage extends Actions {
         try{
             Assert.assertEquals(masterTestAutomationTxt.getText(), masterTestAutomationTxt.getText(), "Landing page validation failed: Master Test Automation text does not match expected.");
             System.out.println("Landing page validation successful: Master Test Automation text matches expected.");
-            screenshots.captureScreenshot(driver, "LandingPage successful");
+           getBase64Screenshot(driver);
         } catch (Exception e) {
             System.out.println("Landing page failed: " + e.getMessage());
-            screenshots.captureScreenshot(driver, "LandingPage_Failure");
+            getBase64Screenshot(driver);
             Assert.fail("Landing page failed: " + e.getMessage());
 
         }

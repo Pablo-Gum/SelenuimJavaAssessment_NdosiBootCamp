@@ -289,4 +289,19 @@ public class Actions {
             System.err.println("Error while handling alert: " + e.getMessage());
         }
     }
+
+    public  static void switchToNewTab(WebDriver driver) {
+
+        String parent = driver.getWindowHandle();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(d -> d.getWindowHandles().size() > 1);
+
+        for (String window : driver.getWindowHandles()) {
+            if (!window.equals(parent)) {
+                driver.switchTo().window(window);
+                break;
+            }
+        }
+    }
 }
