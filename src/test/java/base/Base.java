@@ -38,12 +38,12 @@ public class Base extends BrowserFactory {
         navigateToUrl(Url);
         screenshots = new Screenshots();
 
-        landingObj = new LandingPage(getDriver());
-        loginObj = new LoginPage(getDriver());
-        learnObj = new LearnPage(getDriver());
-        inventoryObj = new InventoryPage(getDriver());
-        orderPreviewObj = new OrderPreviewPage(getDriver());
-        logoutObj = new LogoutPage(getDriver());
+        landingObj = new LandingPage(driver);
+        loginObj = new LoginPage(driver);
+        learnObj = new LearnPage(driver);
+        inventoryObj = new InventoryPage(driver);
+        orderPreviewObj = new OrderPreviewPage(driver);
+        logoutObj = new LogoutPage(driver);
 
     }
 
@@ -56,8 +56,8 @@ public class Base extends BrowserFactory {
     // This method will run after each test method and will close and quit the WebDriver to ensure a clean state for the next test.
     @AfterSuite
     public  void tearDown(){
-        getDriver().close();
-        getDriver().quit();
+        driver.close();
+       driver.quit();
     }
 
 }

@@ -46,20 +46,22 @@ SelenuimJavaAssessment_NdosiBootCamp/
 │       │   │   ├── DataFunction.java         # Data management utilities
 │       │   │   ├── ExcelReader.java          # Excel file reader
 │       │   │   ├── JsonReader.java           # JSON file reader
-│       │   │   └── Utilities/
-│       │   │       ├── BrowserFactory.java   # WebDriver factory
-│       │   │       └── Screenshots.java      # Screenshot utilities
+│       │   │   └── ReportingUtils.java       # Reporting utilities
 │       │   ├── Pages/                        # Page Object Model classes
-│       │   │   ├── LandingPage.java
-│       │   │   ├── LoginPage.java
-│       │   │   ├── LearnPage.java
 │       │   │   ├── InventoryPage.java
+│       │   │   ├── LandingPage.java
+│       │   │   ├── LearnPage.java
+│       │   │   ├── LoginPage.java
+│       │   │   ├── LogoutPage.java
 │       │   │   └── OrderPreviewPage.java
 │       │   ├── ReportUtils/                  # Reporting utilities
 │       │   │   ├── ExtentReportManager.java
 │       │   │   └── Listener.java             # TestNG listener for reporting
-│       │   └── Tests/
-│       │       └── Pablo_Test.java           # Main test class
+│       │   ├── Tests/
+│       │   │   └── Pablo_Test.java           # Main test class
+│       │   └── Utilities/
+│       │       ├── BrowserFactory.java       # WebDriver factory
+│       │       └── Screenshots.java          # Screenshot utilities
 │       └── resources/
 │           ├── ConfigFiles/
 │           │   └── Config.json               # Application configuration

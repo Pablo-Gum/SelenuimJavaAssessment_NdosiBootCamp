@@ -7,9 +7,9 @@ public class BrowserFactory {
     public  static WebDriver driver;
 
     // Get Driver method
-    public  static WebDriver getDriver() {
+/*    public  static WebDriver getDriver() {
         return driver;
-    }
+    }*/
 
     // Set Driver method
     public static WebDriver setDriver(String browserChoice) {

@@ -1,5 +1,6 @@
 package ReportUtils;
 
+import Utilities.BrowserFactory;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +8,6 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import static Utilities.BrowserFactory.getDriver;
 import static Utilities.Screenshots.getBase64Screenshot;
 
 public class Listener implements ITestListener {
@@ -39,7 +39,7 @@ public class Listener implements ITestListener {
 
             test.fail(result.getThrowable());
 
-            WebDriver driver = getDriver();
+            WebDriver driver = BrowserFactory.driver;
 
             String screenshot = getBase64Screenshot(driver);
 
@@ -57,7 +57,7 @@ public class Listener implements ITestListener {
 
             test.pass(result.getThrowable());
 
-            WebDriver driver = getDriver();
+            WebDriver driver = BrowserFactory.driver;
 
             String screenshot = getBase64Screenshot(driver);
 
@@ -75,7 +75,7 @@ public class Listener implements ITestListener {
 
             test.skip(result.getThrowable());
 
-            WebDriver driver = getDriver();
+            WebDriver driver = BrowserFactory.driver;
 
             String screenshot = getBase64Screenshot(driver);
 
