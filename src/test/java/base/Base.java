@@ -26,6 +26,7 @@ public class Base extends BrowserFactory {
     public static LearnPage learnObj;
     public static InventoryPage inventoryObj;
     public static OrderPreviewPage orderPreviewObj;
+    public static LogoutPage logoutObj;
 
     // This method will run before the entire test suite and will set up the WebDriver, navigate to the URL, and initialize the page objects.
     @BeforeSuite
@@ -42,6 +43,7 @@ public class Base extends BrowserFactory {
         learnObj = new LearnPage(getDriver());
         inventoryObj = new InventoryPage(getDriver());
         orderPreviewObj = new OrderPreviewPage(getDriver());
+        logoutObj = new LogoutPage(getDriver());
 
     }
 
@@ -57,10 +59,5 @@ public class Base extends BrowserFactory {
         getDriver().close();
         getDriver().quit();
     }
-
-    // Method to switch to the newly opened tab
-
-
-
 
 }

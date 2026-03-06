@@ -283,6 +283,7 @@ public class Actions {
 
             Alert alert = driver.switchTo().alert();
             System.out.println("Js Alert Found: " + alert.getText());
+            alert.accept();
         } catch (TimeoutException e) {
             System.out.println("No alert found within timeout, continuing with test execution.");
         } catch (Exception e) {
@@ -290,13 +291,16 @@ public class Actions {
         }
     }
 
+    // Switch to new tab if it opens, otherwise continue with the current tab
     public  static void switchToNewTab(WebDriver driver) {
-
+        //
         String parent = driver.getWindowHandle();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        // Wait until a new window is opened (total windows > 1)
         wait.until(d -> d.getWindowHandles().size() > 1);
 
+        // Switch to the new window/tab
         for (String window : driver.getWindowHandles()) {
             if (!window.equals(parent)) {
                 driver.switchTo().window(window);

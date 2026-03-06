@@ -45,4 +45,10 @@ public class Pablo_Test extends Base {
             orderPreviewObj.viewInvoice();
         }
 
+        @Test(dependsOnMethods = "viewInvoiceTest")
+        public void logoutTest() throws IOException {
+            logoutObj.logout();
+            logoutObj.validateLogout();
+        }
+
 }
